@@ -12,7 +12,7 @@
 
 <body>
     {{!-- <div class='top_container'> --}}
-        <div class="container inlinr">
+        <div class=".container-fluid inlinr">
             <br>
             <br>
             <div class="pCard float-left  border rounded "><br>
@@ -43,6 +43,7 @@
             background-color: #383A59;
             height: 100vh;
             width: 100vw;
+            margin:0px;
         }
 
 
@@ -78,8 +79,14 @@
         }
 
         @media only screen and (max-width: 768px) {
+            .container-fluid{
+                margin: 0;
+                padding: 0;
+
+            }
             .inlinr {
                 padding-top: 0px;
+                margin-top: -20px;
                 flex-direction: column;
                 height: 100vh;
             }
