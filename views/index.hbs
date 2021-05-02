@@ -11,210 +11,210 @@
 </head>
 
 <body>
-    {{!-- <div class='top_container'> --}}
-        <div class=".container-fluid inlinr">
-            <br>
-            <br>
-            {{!-- <div class="pCard float-left  border rounded "><br>
-                <h4 class="text-center ">QR Code Generator</h4>
-                <br>
-                <form action="/gencode" method="POST">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="url" id="url" placeholder="Enter Url"
-                            value="{{url}}" required>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-dark mt-2 text-center" onclick="submitFunction()">Generate
-                            QR</button>
-                        <button class="btn btn-danger mt-2 text-center" onclick="clearFunction()">Clear URL</button>
-                    </div>
-                </form>
-            </div> --}}
-            <div class="pCard float-left border rounded">
-                <div class="accordion " id="accordionExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                               <h5> QR Code Generator</h5>
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <form action="/gencode" method="POST">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="encryption_key" id="encryption_key"
-                                            placeholder="Enter Encryption Key" autocomplete="off" required>
-                                            <br>
-                                        <input type="text" class="form-control" name="url" id="url"
-                                            placeholder="Enter Url" autocomplete="off" value="{{url}}" required>
-                                    </div>
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-dark mt-2 text-center">Generate
-                                            QR</button>
-                                        <button class="btn btn-danger mt-2 text-center" onclick="clearFunction('url')">Clear
-                                            URL</button>
-                                    </div>
-                                </form>
-                            </div>
+    {{#if error}}
+    <div class="alert alert-danger text-center" role="alert">
+        <small>Encryption Key or Encoded String is Wrong. Try Again !!</small>
+    </div>
+    {{/if}}
+    <div class=".container-fluid inlinr">
+        <br>
+        <br>
+        <div class="pCard float-left border rounded">
+            <div class="accordion " id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <h5> QR Code Generator</h5>
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <form action="/gencode" method="POST">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="encryption_key" id="encryption_key"
+                                        placeholder="Enter Encryption Key" autocomplete="off" required>
+                                    <br>
+                                    <input type="text" class="form-control" name="url" id="url" placeholder="Enter Url"
+                                        autocomplete="off" value="{{url}}" required>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-dark mt-2 text-center">Generate
+                                        QR</button>
+                                    <button class="btn btn-danger mt-2 text-center" onclick="clearFunction('url')">Clear
+                                        URL</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
+                </div>
 
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                               <h5> Decode Encryption</h5>
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <h5> Decode Encryption</h5>
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
 
-                                <form action="/decode" method="POST">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="encryption_key" id="encryption_key"
-                                            placeholder="Enter Encryption Key" autocomplete="off" required>
-                                            <br>
-                                        <input type="text" class="form-control" name="encoded_string" id="encoded_string"
-                                            placeholder="Enter Encoded String" autocomplete="off" value="{{encoded_string}}" required>
-                                    </div>
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-dark mt-2 text-center">Decode Encryption</button>
-                                        <button class="btn btn-danger mt-2 text-center" onclick="clearFunction('encoded_string')">Clear
-                                            </button>
-                                    </div>
-                                </form>
+                            <form action="/decode" method="POST">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="encryption_key" id="encryption_key"
+                                        placeholder="Enter Encryption Key" autocomplete="off" required>
+                                    <br>
+                                    <input type="text" class="form-control" name="encoded_string" id="encoded_string"
+                                        placeholder="Enter Encoded String" autocomplete="off" value="{{encoded_string}}"
+                                        required>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-dark mt-2 text-center">Decode
+                                        Encryption</button>
+                                    <button class="btn btn-danger mt-2 text-center"
+                                        onclick="clearFunction('encoded_string')">Clear
+                                    </button>
+                                </div>
+                            </form>
 
-                            </div>
                         </div>
                     </div>
-                    <div />
                 </div>
+                <div />
             </div>
-            <div class="pCard  float-right border rounded ">
-                <br>
-                {{#if encodedURL}}
-                <div >
-                    <h4 class="text-center ">QR CODE</h4>
-                    <img src="{{encodedURL}}" alt="">
-                </div>
-                {{else if decryptedURL}}
-                <div class="url">
-                   <h5><a href="{{decryptedURL}}">{{decryptedURL}}</a> </h5> 
-                </div>
-                {{else}}
-                {{/if}}
-                <br>
-            </div>
-
         </div>
-        <style>
-            body {
-                background-color: #383A59;
-                height: 100vh;
-                width: 100vw;
-                margin: 0px;
+        <div class="pCard  float-right border rounded ">
+            <br>
+            {{#if encodedURL}}
+            <div>
+                <h4 class="text-center ">QR CODE</h4>
+                <img src="{{encodedURL}}" alt="">
+            </div>
+            {{else if decryptedURL}}
+            <div class="url">
+                {{#if decryptedURL.Error}}
+                <h5>Error with Encryption Key Or Encoded String</h5>
+                {{/if}}
+                <h5><a href="{{decryptedURL}}">{{decryptedURL}}</a> </h5>
+            </div>
+            {{else}}
+            {{/if}}
+            <br>
+        </div>
+
+    </div>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: #383A59;
+            height: 100vh;
+            width: 100vw;
+            margin: 0px;
+        }
+
+
+        .inlinr {
+            position: absolute;
+            padding-top: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: max-content;
+        }
+
+        .pCard {
+            width: 100vw;
+            background-color: white;
+            flex: .5;
+            display: flex;
+            flex-shrink: 1;
+            justify-content: space-around;
+            align-items: center;
+            margin: 0 10px;
+            padding: 20px;
+
+        }
+
+        .accordion {
+            width: 100%;
+        }
+
+        .selector {
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+        }
+
+        .selector>h3 {
+            font-weight: normal;
+            font-size: 25px;
+        }
+
+        form {
+            margin: 10px, 20px;
+            width: 100%;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        img {
+            width: 210px;
+            object-fit: contain;
+        }
+
+        .url {
+            max-width: 200px;
+            max-height: 240px;
+            word-wrap: break-word;
+            overflow: scroll;
+
+        }
+
+        .url::-webkit-scrollbar {
+            display: none;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .container-fluid {
+                margin: 0;
+                padding: 0;
+
             }
 
-
             .inlinr {
-                padding-top: 150px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 100vw;
-                height: max-content;
+                padding-top: 0px;
+                margin-top: -20px;
+                flex-direction: column;
+                height: 100vh;
             }
 
             .pCard {
                 width: 100vw;
-                background-color: white;
-                flex: .5;
-                display: flex;
-                flex-shrink: 1;
-                justify-content: space-around;
-                align-items: center;
-                margin: 0 10px;
-                padding: 20px;
-
+                flex-direction: column;
+                margin: 10px;
+                padding: 0px;
             }
 
-            .accordion {
-                width: 100%;
-            }
-
-            .selector {
-                display: flex;
-                width: 100%;
-                justify-content: space-around;
-            }
-
-            .selector>h3 {
-                font-weight: normal;
-                font-size: 25px;
-            }
-
-            form {
-                margin: 10px, 20px;
-                width: 100%;
-            }
-
-            input::-webkit-outer-spin-button,
-            input::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-            }
-
-            img {
-                width: 210px;
-                object-fit: contain;
-            }
-            .url{
-                max-width: 200px;
-                max-height: 240px;
-                word-wrap: break-word;
-                overflow: scroll;
-
-            }
-            .url::-webkit-scrollbar{
-                display: none;
-            }
-
-            @media only screen and (max-width: 768px) {
-                .container-fluid {
-                    margin: 0;
-                    padding: 0;
-
-                }
-
-                .inlinr {
-                    padding-top: 0px;
-                    margin-top: -20px;
-                    flex-direction: column;
-                    height: 100vh;
-                }
-
-                .pCard {
-                    width: 100vw;
-                    flex-direction: column;
-                    margin: 10px;
-                    padding: 0px;
-                }
-
-            }
-        </style>
-        <script>
-            const clearFunction = (id) => {
-                console.log(id)
-                document.getElementById(id).value = ""
-                window.location.href = "/"
-            }
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-            crossorigin="anonymous"></script>
+        }
+    </style>
+    <script>
+        const clearFunction = (id) => {
+            console.log(id)
+            document.getElementById(id).value = ""
+            window.location.href = "/"
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
